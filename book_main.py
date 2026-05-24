@@ -22,8 +22,6 @@ c = conn.cursor()
 
 login_flag = False
 sign_in_flag = False
-conn = sqlite3.connect('book_database.db', check_same_thread=False)
-c = conn.cursor()
 
 #usernameが使われていたら、それは使えないようにしないとだね
 
