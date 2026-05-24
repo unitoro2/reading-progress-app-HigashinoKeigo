@@ -11,10 +11,10 @@ import psycopg2
 import os
 
 conn = psycopg2.connect(
-    host="YOUR_SUPABASE_HOST",
+    host="db.ulqyrqyfwvaqetvbprxo.supabase.co",
     database="postgres",
     user="postgres",
-    password="YOUR_SUPABASE_PASSWORD",
+    password="supabase0423",
     port=5432
 )
 c = conn.cursor()
