@@ -32,14 +32,14 @@ def make_hashes(password):
 
 def add_user(username, password):
     try:
-        c.execute('INSERT INTO users(username, password_hash) VALUES (?, ?)', (username, password))
+        c.execute('INSERT INTO users(username, password_hash) VALUES (%s, %s)', (username, password))
         conn.commit()
         return True
     except sqlite3.IntegrityError:
         return False
 
 def login_user(username, password):
-    c.execute('SELECT * FROM users WHERE username = ? AND password_hash = ?', (username, password))
+    c.execute('SELECT * FROM users WHERE username = %s AND password_hash = %s', (username, password))
     data = c.fetchall()
     return data
 
@@ -48,7 +48,7 @@ def update_sql(edit_df,read_book_ids,now_user_id,today):
     for id in edit_read:
         if id not in read_book_ids:
             c.execute(
-                'INSERT INTO user_books (user_id ,book_id ,read_flag ,read_date) VALUES (?,?,?,?)', (now_user_id,id,True,today))
+                'INSERT INTO user_books (user_id ,book_id ,read_flag ,read_date) VALUES (%s,%s,%s,%s)', (now_user_id,id,True,today))
     conn.commit()
     st.success('登録が完了しました')
     st.rerun()
@@ -69,7 +69,7 @@ def main():
         st.write('各シリーズは基本的にシリーズの順番に則って、下に行くほど最新作になるように表示しています。')
 
         #ここから各ユーザーに合わせた表を作成
-        c.execute('SELECT user_id FROM users WHERE username = ?',(user_name,))
+        c.execute('SELECT user_id FROM users WHERE username = %s',(user_name,))
         temp_result = c.fetchone()
         if temp_result is not None:
             now_user_id = temp_result[0]
@@ -80,7 +80,7 @@ def main():
         book_list_pandas = pd.read_sql("SELECT * FROM books",conn)
         book_list_pandas['read'] = False
 
-        c.execute('SELECT book_id, read_date FROM user_books WHERE user_id = ?',(now_user_id,))
+        c.execute('SELECT book_id, read_date FROM user_books WHERE user_id = %s',(now_user_id,))
         read_book_ids = [row[0] for row in c.fetchall()]
         book_list_pandas.loc[book_list_pandas['book_id'].isin(read_book_ids),'read'] = True
         #genresを作るぞ！！
@@ -168,7 +168,7 @@ def main():
             SELECT b.title, u.read_date
             FROM user_books u
             INNER JOIN books b ON u.book_id = b.book_id
-            WHERE u.user_id = ?
+            WHERE u.user_id = %s
             '''
 
             record_pd = pd.read_sql(query, conn,params = (now_user_id,))
