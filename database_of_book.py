@@ -35,7 +35,7 @@ c.execute("SELECT name FROM sqlite_master WHERE type='table'")
 tables = c.fetchall()
 print(tables)
 
-df = pd.read_csv('/Users/aberikako/ML/.venv/book_count/higashino_keigo_base.csv')
+df = pd.read_csv('higashino_keigo_base.csv')
 sub_df = df[['title','genre','flag','finish_date']]
 for n,row in sub_df.iterrows():
     title = row['title']
