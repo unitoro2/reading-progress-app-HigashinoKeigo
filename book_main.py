@@ -69,6 +69,7 @@ def main():
         st.write('シリーズ別の読書率を出すよ！')
         st.write('本サイトはwikipediaを参照しています。また個人による非公式サイトです。')
         st.write('各シリーズは基本的にシリーズの順番に則って、下に行くほど最新作になるように表示しています。')
+        st.write('登録の反映には数分程度遅れが出る場合があります。')
 
         #ここから各ユーザーに合わせた表を作成
         c.execute('SELECT user_id FROM users WHERE username = %s',(user_name,))
