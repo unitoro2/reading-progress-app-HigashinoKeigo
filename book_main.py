@@ -33,7 +33,7 @@ def add_user(username, password):
         c.execute('INSERT INTO users(username, password_hash) VALUES (%s, %s)', (username, password))
         conn.commit()
         return True
-    except psycopg2..IntegrityError:
+    except psycopg2.IntegrityError:
         return False
 
 def login_user(username, password):
