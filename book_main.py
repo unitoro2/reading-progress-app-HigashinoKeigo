@@ -14,7 +14,7 @@ conn = psycopg2.connect(
     host="db.ulqyrqyfwvaqetvbprxo.supabase.co",
     database="postgres",
     user="postgres",
-    password="Supabase0423",
+    password="mec3iAAd59nNCZWY",
     port=5432
 )
 c = conn.cursor()
