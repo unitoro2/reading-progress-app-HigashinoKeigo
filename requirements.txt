@@ -1,3 +1,5 @@
 streamlit
 pandas
 plotly
+pyyaml
+streamlit-authenticator
