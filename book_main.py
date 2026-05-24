@@ -8,6 +8,17 @@ from yaml.loader import SafeLoader
 import sqlite3
 import hashlib
 from datetime import date
+import psycopg2
+import os
+
+conn = psycopg2.connect(
+    host="YOUR_SUPABASE_HOST",
+    database="postgres",
+    user="postgres",
+    password="YOUR_SUPABASE_PASSWORD",
+    port=5432
+)
+c = conn.cursor()
 
 login_flag = False
 sign_in_flag = False
