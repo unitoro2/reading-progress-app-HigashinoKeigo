@@ -3,3 +3,4 @@ pandas
 plotly
 pyyaml
 streamlit-authenticator
+psycopg2-binary
