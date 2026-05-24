@@ -13,11 +13,11 @@ import os
 @st.cache_resource
 def get_connection():
     return psycopg2.connect(
-        host="pooler.db.ulqyrqyfwvaqetvbprxo.supabase.co",
+        host="aws-1-ap-southeast-2.pooler.supabase.com",
         database="postgres",
-        user="postgres",
-        password="あなたのDatabase password",
-        port=5432  # または 6543（あなたのpoolerのportに合わせる）
+        user="postgres.ulqyrqyfwvaqetvbprxo",
+        password="wF9ZWFA5trrs4gJq",
+        port=6543
     )
 
 conn = get_connection()
