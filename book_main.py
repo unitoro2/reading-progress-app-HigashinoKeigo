@@ -10,13 +10,17 @@ from datetime import date
 import psycopg2
 import os
 
-conn = psycopg2.connect(
-    host="aws-1-ap-southeast-2.pooler.supabase.com",
-    database="postgres",
-    user="postgres.ulqyrqyfwvaqetvbprxo",
-    password="mec3iAAd59nNCZWY",
-    port=6543
-)
+@st.cache_resource
+def get_connection():
+    return psycopg2.connect(
+        host="pooler.db.ulqyrqyfwvaqetvbprxo.supabase.co",
+        database="postgres",
+        user="postgres",
+        password="あなたのDatabase password",
+        port=5432  # または 6543（あなたのpoolerのportに合わせる）
+    )
+
+conn = get_connection()
 c = conn.cursor()
 
 login_flag = False
