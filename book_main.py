@@ -5,7 +5,6 @@ import os
 import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
-import sqlite3
 import hashlib
 from datetime import date
 import psycopg2
@@ -34,6 +33,7 @@ def add_user(username, password):
         conn.commit()
         return True
     except psycopg2.IntegrityError:
+        conn.rollback()
         return False
 
 def login_user(username, password):
