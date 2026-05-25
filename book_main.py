@@ -67,6 +67,7 @@ def main():
 
     # 2. ログイン後の画面を表示する条件分岐
     if st.session_state["is_login"]:
+        st.session_state.clear()
         user_name = st.session_state['user_name']
         st.title(f"ようこそ、{st.session_state['user_name']} さん！")
         st.write('シリーズ別の読書率を出すよ！')
