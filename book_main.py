@@ -10,15 +10,15 @@ from datetime import date
 import psycopg2
 import os
 
-conn = psycopg2.connect(
-    host=os.getenv("DB_HOST"),
-    database=os.getenv("DB_NAME"),
-    user=os.getenv("DB_USER"),
-    password=os.getenv("DB_PASSWORD"),
-    port=os.getenv("DB_PORT")
-)
-
-
+# ① 先に関数を定義する
+def get_connection():
+    return psycopg2.connect(
+        host=st.secrets["DB_HOST"],
+        database=st.secrets["DB_NAME"],
+        user=st.secrets["DB_USER"],
+        password=st.secrets["DB_PASSWORD"],
+        port=st.secrets["DB_PORT"]
+    )
 conn = get_connection()
 c = conn.cursor()
 
