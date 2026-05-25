@@ -29,6 +29,8 @@ def make_hashes(password):
     return hashlib.sha256(str.encode(password)).hexdigest()
 
 def add_user(username, password):
+    conn = get_connection()
+    c = conn.cursor()
     try:
         c.execute('INSERT INTO users(username, password_hash) VALUES (%s, %s)', (username, password))
         conn.commit()
@@ -38,11 +40,15 @@ def add_user(username, password):
         return False
 
 def login_user(username, password):
+    conn = get_connection()
+    c = conn.cursor()
     c.execute('SELECT * FROM users WHERE username = %s AND password_hash = %s', (username, password))
     data = c.fetchall()
     return data
 
 def update_sql(edit_df,read_book_ids,now_user_id,today):
+    conn = get_connection()
+    c = conn.cursor()
     edit_read = edit_df.loc[edit_df['read'] == True, 'book_id'].to_list()
     for id in edit_read:
         if id not in read_book_ids:
