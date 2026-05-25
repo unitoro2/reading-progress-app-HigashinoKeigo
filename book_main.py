@@ -9,16 +9,17 @@ import hashlib
 from datetime import date
 import psycopg2
 import os
+from dotenv import load_dotenv
 
-@st.cache_resource
-def get_connection():
-    return psycopg2.connect(
-        host="aws-1-ap-southeast-2.pooler.supabase.com",
-        database="postgres",
-        user="postgres.ulqyrqyfwvaqetvbprxo",
-        password="wF9ZWFA5trrs4gJq",
-        port=6543
-    )
+load_dotenv()
+conn = psycopg2.connect(
+    host=os.getenv("DB_HOST"),
+    database=os.getenv("DB_NAME"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    port=os.getenv("DB_PORT")
+)
+
 
 conn = get_connection()
 c = conn.cursor()
