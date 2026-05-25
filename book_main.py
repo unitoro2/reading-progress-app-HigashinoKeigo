@@ -25,8 +25,6 @@ c = conn.cursor()
 login_flag = False
 sign_in_flag = False
 
-#usernameが使われていたら、それは使えないようにしないとだね
-
 def make_hashes(password):
     return hashlib.sha256(str.encode(password)).hexdigest()
 
@@ -85,10 +83,8 @@ def main():
         c.execute('SELECT book_id, read_date FROM user_books WHERE user_id = %s',(now_user_id,))
         read_book_ids = [row[0] for row in c.fetchall()]
         book_list_pandas.loc[book_list_pandas['book_id'].isin(read_book_ids),'read'] = True
-        #genresを作るぞ！！
         genres = book_list_pandas['genre'].unique()
         circle_color_map = {'読了':"#1e90ff",'未読':"gray"}
-        #ここまで、各ユーザーに合わせた表を作成
 
         have_read = len(read_book_ids)
         all_books_number = len(book_list_pandas)
@@ -103,7 +99,7 @@ def main():
                 st.session_state.results = book_list_pandas[book_list_pandas['title'].str.contains(search, na = False)].copy()
 
             if 'results' in st.session_state:
-                st.write('読んだ本のflagにチェックしてください')
+                st.write('読んだ本のreadにチェックしてください')
                 edit_df = st.data_editor(st.session_state.results, num_rows= 'fixed',key="my_editor_title")
                 
                 if st.button('この本を登録する'):
@@ -158,7 +154,7 @@ def main():
                 st.session_state.results2 = book_list_pandas[book_list_pandas['genre'].str.contains(search, na = False)].copy()
 
             if 'results2' in st.session_state:
-                st.write('読んだ本のflagにチェックしてください。複数選択も可能です')
+                st.write('読んだ本のreadにチェックしてください。複数選択も可能です')
                 edited_df2 = st.data_editor(st.session_state.results2, num_rows= 'fixed',key="my_editor_genre")
                 
                 if st.button('この本を登録する!!'):
