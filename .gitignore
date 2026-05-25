@@ -1,5 +1,1 @@
-DB_HOST="aws-1-ap-southeast-2.pooler.supabase.com",
-DB_NAME="postgres",
-DB_USER="postgres.ulqyrqyfwvaqetvbprxo",
-DB_PASSWORD="ihRCCcmoUShBxFro",
-DB_PORT="6543"
+.env
