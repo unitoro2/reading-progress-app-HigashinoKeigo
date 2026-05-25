@@ -9,9 +9,7 @@ import hashlib
 from datetime import date
 import psycopg2
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
 conn = psycopg2.connect(
     host=os.getenv("DB_HOST"),
     database=os.getenv("DB_NAME"),
