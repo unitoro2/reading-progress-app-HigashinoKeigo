@@ -10,7 +10,7 @@ from datetime import date
 import psycopg2
 import os
 
-# ① 先に関数を定義する
+@st.cache_resource 
 def get_connection():
     return psycopg2.connect(
         host=st.secrets["DB_HOST"],
